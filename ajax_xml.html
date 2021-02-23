@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>ajax 연습</title>
+    </head>
+    <body>
+        <button id="ajaxButton" type="button">Make a request </button>
+        <script>
+                var httpRequest;
+                document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+
+            function makeRequest(){
+                httpRequest = new XMLHttpRequest();
+
+                if(!httpRequest){
+                    alert("XMLHTTP 인스턴스를 만들 수 없다.");
+                    return false;
+                }
+
+                httpRequest.onreadystatechange = alertContents;
+                httpRequest.open('GET', 'test_xml.xml');
+                httpRequest.send();
+            }
+
+            function alertContents(){
+                try{
+                    if(httpRequest.readyState === XMLHttpRequest.DONE){
+                        if(httpRequest.status === 200){
+                            var xmldoc = httpRequest.responseXML;
+                            var root_node = xmldoc.getElementsByTagName('root').item(0);
+                            alert(root_node.firstChild.data);
+                        }
+                        else{
+                            alert('request에 문제가 있어요.');
+                        }
+                    }
+                }catch(e){
+                    alert('Caught Exception' + e.exception);
+                }
+            }
+        </script>
+    </body>
+</html>
