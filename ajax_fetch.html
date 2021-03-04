@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <article>
+
+        </article>
+        <input type="button" value="fetch" onclick="
+        fetch('test_html.html').then(function(response){ // fetch : 서버로부터 인자를 요청
+            response.text().then(function(text){ //  then : fetch api로부터 응답이 끝나면 함수를 호출해라(비동기).
+                //alert(text);
+                document.querySelector('article').innerHTML = text;
+            })
+        })
+        ">
+    </body>
+</html>
